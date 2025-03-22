@@ -2,7 +2,8 @@
 import streamlit as st
 import requests
 
-API_BASE_URL = "http://localhost:8000"  # Update if deployed elsewhere
+#API_BASE_URL = "https://phill2001-news-fetcher.hf.space"
+API_BASE_URL = "http://localhost:8000"
 
 def main():
     st.title("News Analysis & Summarization")
@@ -33,12 +34,16 @@ def main():
             response = requests.post(f"{API_BASE_URL}/analyze-news", json={"links": manual_links})
             if response.status_code == 200:
                 data = response.json()
-                
                 st.subheader("Summary")
                 st.write(data["summary"])
                 if "audio" in data:
-                    audio_bytes = bytes.fromhex(data["audio"])
-                    st.audio(audio_bytes, format="audio/mp3")
+                    try:
+                        audio_bytes = bytes.fromhex(data["audio"])
+                        st.audio(audio_bytes, format="audio/mp3")
+                        st.success("Audio should be playing now!")  # Debugging
+                    except Exception as e:
+                        st.error(f"Failed to play audio: {e}")  # Debugging
+
                 
                 st.subheader("Analysis Results")
                 for i, article in enumerate(data["articles"], 1):
