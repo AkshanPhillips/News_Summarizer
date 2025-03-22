@@ -1,0 +1,13 @@
+streamlit
+fastapi
+uvicorn
+requests
+feedparser
+beautifulsoup4
+newspaper3k
+nltk
+gTTS
+googletrans
+groq
+pydantic
+urllib3
