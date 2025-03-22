@@ -25,6 +25,7 @@ async def fetch_links(request: CompanyRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching links: {str(e)}")
 
+
 @app.post("/analyze-news")
 async def analyze_news(request: LinksRequest):
     if len(request.links) < 2:
@@ -50,12 +51,10 @@ async def analyze_news(request: LinksRequest):
     
     if summary_audio and os.path.exists(summary_audio):
         with open(summary_audio, "rb") as f:
-            response["audio"] = f.read().hex()  # Return audio as hex string
-    
+            response["audio"] = f.read().hex()  # Keep as hex for now
+
     return response
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-    # uvicorn.run(app, host="localhost", port=8000)
-
