@@ -9,9 +9,9 @@ def main():
     st.title("News Analysis & Summarization")
     
     # Fetch RSS Links
-    company = st.sidebar.text_input("Enter company name", "Tesla")
+    Input = st.sidebar.text_input("Enter your search", "Tesla")
     if st.sidebar.button("Fetch News Links"):
-        response = requests.post(f"{API_BASE_URL}/fetch-links", json={"company": company})
+        response = requests.post(f"{API_BASE_URL}/fetch-links", json={"Input": Input})
         if response.status_code == 200:
             data = response.json()
             st.sidebar.subheader("Fetched News Links:")
@@ -23,6 +23,7 @@ def main():
     
     # Manual Link Input
     st.subheader("Manual Link Input")
+    st.subheader("Note: Please open the links, and then copy and paste the link from the search results here.")
     manual_links = [st.text_input(f"Enter Link {i+1}", "") for i in range(10)]
     manual_links = [link for link in manual_links if link.strip()]
     
