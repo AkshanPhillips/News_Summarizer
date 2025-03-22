@@ -8,6 +8,7 @@ from gtts import gTTS
 from googletrans import Translator
 import urllib.parse
 from groq import Groq
+import os
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 GROQ_API_KEY = "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"
@@ -65,6 +66,7 @@ def generate_summary(articles):
     )
     return response.choices[0].message.content
 
+
 def generate_tts(text):
     if not text or text.strip() == "No content available for summarization.":
         return None
@@ -77,5 +79,6 @@ def generate_tts(text):
         audio_file = "summary_output.mp3"
         tts.save(audio_file)
         return audio_file
-    except Exception:
+    except Exception as e:
+        print(f"TTS Error: {e}")
         return None
