@@ -7,8 +7,8 @@ import os
 
 app = FastAPI()
 
-class CompanyRequest(BaseModel):
-    company: str
+class InputRequest(BaseModel):
+    Input: str
 
 class LinksRequest(BaseModel):
     links: List[str]
@@ -18,10 +18,10 @@ async def health_check():
     return {"status": "API is running"}
 
 @app.post("/fetch-links")
-async def fetch_links(request: CompanyRequest):
+async def fetch_links(request: InputRequest):
     try:
-        links = utils.fetch_rss_links(request.company)
-        return {"company": request.company, "links": [{"title": title, "url": url} for title, url in links]}
+        links = utils.fetch_rss_links(request.Input)
+        return {"Input": request.Input, "links": [{"title": title, "url": url} for title, url in links]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching links: {str(e)}")
 
@@ -58,3 +58,4 @@ async def analyze_news(request: LinksRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
