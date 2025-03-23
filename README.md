@@ -1,18 +1,25 @@
-News Summarization and Text-to-Speech Application
+**News Summarization and Text-to-Speech Application
+**
 This project is a web-based application that extracts news articles related to a given company, performs sentiment analysis, conducts comparative sentiment analysis across articles, and generates a Hindi text-to-speech (TTS) output. The application uses a Streamlit frontend and a FastAPI backend, deployed on Hugging Face Spaces.
+
+
 Objective
+
 Develop a tool that:
 Extracts key details from at least 10 news articles.
 Analyzes sentiment (positive, negative, neutral).
 Provides comparative insights on news coverage.
 Converts summaries to Hindi audio.
 Offers a user-friendly interface and API-driven communication.
+
 news-summarization-app/
 ├── app.py          # Streamlit frontend
 ├── api.py          # FastAPI backend
 ├── utils.py        # Utility functions for extraction, analysis, and TTS
 ├── requirements.txt # Dependencies
 ├── README.md       # Documentation (this file)
+
+
 
 Deployment
 Hugging Face Spaces Link: https://huggingface.co/spaces/Phill2001/News_fetcher
@@ -41,6 +48,7 @@ Library: gtts (Google Text-to-Speech), google_trans_new (translation)
 Method: Translates summary to Hindi, converts to MP3 audio.
 Output: Playable Hindi audio file.
 
+
 API Development
 Backend (api.py)
 Framework: FastAPI
@@ -53,12 +61,16 @@ Response: {"Input": "Tesla", "links": [{"title": "...", "url": "..."}, ...]}
 POST /analyze-news: Analyzes provided links.
 Request: {"links": ["url1", "url2", ...]}
 Response: {"summary": "...", "articles": [...], "extraction_counts": {...}, "audio": "..."}
+
+
 Assumptions & Limitations
+
 Assumptions
 Google News RSS provides at least 10 scrapeable articles.
 Articles are in English; translation to Hindi is accurate.
 Non-JS weblinks are accessible via BeautifulSoup or newspaper3k.
 Groq API has sufficient capacity for summarization.
+
 Limitations
 Scraping: Some articles may require JavaScript, which isn’t supported.
 Translation: may fail for long texts or rate limits.
