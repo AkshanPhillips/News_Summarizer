@@ -2,7 +2,6 @@
 import streamlit as st
 import requests
 
-#API_BASE_URL = "https://phill2001-news-fetcher.hf.space"
 API_BASE_URL = "http://localhost:8000"
 
 def main():
